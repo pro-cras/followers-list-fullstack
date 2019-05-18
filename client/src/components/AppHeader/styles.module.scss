@@ -68,7 +68,7 @@
 
   &:after {
     content: "@";
-    color: orange;
+    color: var(--color-accent);
     position: absolute;
     left: 10px;
     height: 100%;

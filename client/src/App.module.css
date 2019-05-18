@@ -5,6 +5,7 @@
   --color-background-secondary: #29427b;
   --color-text: #a1a4a4;
   --color-background-item: #e3e3e1;
+  --color-accent: orange;
   width: 100%;
   color: var(--color-text);
   display: flex;

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles.module.scss";
-import { IItem } from "../../App";
+import { IItem } from "../../api/types";
 
 export const ListItem = (props: { item: IItem }) => {
   const {

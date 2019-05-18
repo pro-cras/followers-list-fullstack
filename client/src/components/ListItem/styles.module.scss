@@ -2,6 +2,7 @@
   --item-height: 110px;
   display: flex;
   border-radius: 20px;
+  box-sizing: border-box;
   background: var(--color-background-item);
   color: #444;
   min-height: var(--item-height);
@@ -9,9 +10,14 @@
   max-width: 100%;
   margin-bottom: 20px;
   overflow: hidden;
+  border: 2px solid transparent;
 
   &:first-child {
     margin-top: 0;
+  }
+
+  &:focus-within {
+    border-color: var(--color-accent);
   }
 }
 
