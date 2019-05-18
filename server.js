@@ -8,6 +8,8 @@ const SERVICE_API_BASE = "https://reqres.in/api";
 
 app.set("port", process.env.PORT || 3001);
 
+/* TODO: Add typing, share those with the ApiClient */
+
 // Express only serves static assets in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -21,7 +23,7 @@ function formatUser(userData) {
   };
 }
 app.get("/api/user", async (req, res) => {
-  const { user_id, page = 1, per_page = 4 } = req.query;
+  const { user_id } = req.query;
 
   if (!user_id) {
     res.json({
@@ -30,7 +32,7 @@ app.get("/api/user", async (req, res) => {
     return;
   }
 
-  // Twitter API: users/lookup
+  // TODO: Switch to Twitter API: users/lookup
   try {
     const response = await axios.get(`${SERVICE_API_BASE}/users/${user_id}`);
     if (!response.data.data) {
@@ -41,10 +43,14 @@ app.get("/api/user", async (req, res) => {
     const data = response.data.data;
     res.json(formatUser(data));
   } catch (e) {
-    res.json({
-      error: `Failed to fetch data for 'user_id=${param}'`
-    });
-    return;
+    res
+      .status(500) // HTTP status 404: NotFound
+      .send(`Failed to fetch data for 'user_id=${user_id}'`);
+
+    // res.json({
+    //   error: `Failed to fetch data for 'user_id=${user_id}'`
+    // });
+    // return;
   }
 });
 
@@ -58,7 +64,7 @@ app.get("/api/followers", async (req, res) => {
     return;
   }
 
-  // Twitter API: hit followers/list
+  // TODO: Switch to Twitter API: followers/list
   try {
     const response = await axios.get(
       `${SERVICE_API_BASE}/users`,
@@ -71,7 +77,7 @@ app.get("/api/followers", async (req, res) => {
     });
   } catch (e) {
     res.json({
-      error: `Failed to fetch followers data for 'user_id=${param}'`
+      error: `Failed to fetch followers data for 'user_id=${user_id}'`
     });
     return;
   }

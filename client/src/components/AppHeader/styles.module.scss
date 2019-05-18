@@ -7,6 +7,7 @@
     padding var(--header-transition-time);
 
   display: flex;
+  align-items: center;
 
   &.active {
     background-color: var(--color-background-primary);
@@ -56,15 +57,18 @@
   }
 }
 
-.inputWrapper {
+.transformer {
   transform: scale(0.5);
   transform-origin: 0;
-  position: relative;
-  font-size: 50px;
 
   .active & {
     transform: none;
   }
+}
+
+.inputWrapper {
+  position: relative;
+  font-size: 50px;
 
   &:after {
     content: "@";
@@ -74,5 +78,16 @@
     height: 100%;
     width: 3rem;
     pointer-events: none;
+  }
+}
+
+.submitButton {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  transition: all calc(var(--header-transition-time) / 2);
+
+  .inactive & {
+    opacity: 0;
   }
 }

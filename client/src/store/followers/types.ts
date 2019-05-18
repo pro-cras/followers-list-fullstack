@@ -1,5 +1,6 @@
 import { IUser } from "../../api/types";
 
+// TODO: add isFetching=false to state
 export type FollowersState = IUser[] | null;
 
 export const SET_FOLLOWERS = "SET_FOLLOWERS";

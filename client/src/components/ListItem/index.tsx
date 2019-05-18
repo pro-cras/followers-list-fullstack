@@ -16,6 +16,7 @@ export const ListItem = (props: { item: IUser }) => {
         <div className={styles.avatarContainer}>
           <div className={styles.avatarWrapper}>
             <img
+              // TODO: add fade in transition on image load
               className={styles.avatar}
               src={avatar}
               alt={`${name}'s avatar`}

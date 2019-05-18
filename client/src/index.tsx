@@ -3,14 +3,18 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { createStore } from "redux";
-import { rootReducer } from "./store";
+import { createStore, applyMiddleware, compose, AnyAction } from "redux";
+import { rootReducer, AppState } from "./store";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
+import thunk, { ThunkMiddleware } from "redux-thunk";
 
+const composeEnhancers =
+  // instead of using any, I could import redux-devtools-extension
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
-  // @ts-ignore
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(thunk))
 );
 
 ReactDOM.render(

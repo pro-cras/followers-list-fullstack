@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import classNames from "classnames";
+import { SelectedUserState } from "../../store/selectedUser/types";
 
-export const AppHeader = () => {
+interface Props {
+  onSetUserAccountName: (name: string) => void;
+  selectedUser: SelectedUserState;
+}
+
+export const AppHeader = (props: Props) => {
   const [isActive, setActive] = useState(true);
+  const [accountName, setAccountName] = useState("");
 
   return (
     <header
@@ -13,14 +20,34 @@ export const AppHeader = () => {
       })}
     >
       <div className={styles.dynamicPositioner} />
-      <div
-        className={styles.inputWrapper}
+      <form
+        className={styles.transformer}
         onFocus={() => setActive(true)}
         onBlur={() => setActive(false)}
-        // onClick={() => setActive(true)}
+        onSubmit={e => {
+          props.onSetUserAccountName(accountName);
+          e.preventDefault();
+        }}
       >
-        <input type="text" className={styles.input} autoFocus={true} />
-      </div>
+        <div className={styles.inputWrapper}>
+          <input
+            type="text"
+            name="accountName"
+            className={styles.input}
+            autoFocus={true}
+            onChange={e => setAccountName(e.target.value)}
+            autoComplete={"off"}
+          />
+        </div>
+      </form>
+      {/* TODO: fadebutton away */}
+      <button
+        type="submit"
+        disabled={!accountName}
+        className={styles.submitButton}
+      >
+        OK
+      </button>
       <div className={styles.positioner} />
     </header>
   );
