@@ -6,6 +6,5 @@ export interface IItem {
 
 export interface IUserResponse {
   followers: IItem[];
-  total: number;
-  page: number;
+  total_followers: number;
 }
