@@ -1,8 +1,8 @@
-import { IItem } from "./types";
+import { IUser } from "./types";
 
 export class ApiClient {
   public async getUserFollowers(user_id: string) {
-    return await this.getRequest<{ followers: IItem[] }>(`api/user`, {
+    return await this.getRequest<{ followers: IUser[] }>(`api/user`, {
       user_id
     });
   }

@@ -4,7 +4,8 @@ import { AppHeader } from "./components/AppHeader";
 import { List } from "./components/List";
 import { ListItem } from "./components/ListItem";
 import { apiClient } from "./api/ApiClient";
-import { IItem } from "./api/types";
+import { IUser } from "./api/types";
+import { connect } from "react-redux";
 
 // const items = [...Array(30)].map((item, i) => ({
 //   name: `Foo ${i}`,
@@ -13,7 +14,7 @@ import { IItem } from "./api/types";
 // }));
 
 const App: React.FC = () => {
-  const [items, setItems] = useState<IItem[]>([]);
+  const [items, setItems] = useState<IUser[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,4 +41,12 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+function mapStateToProps() {}
+
+function mapDispatchToProps() {}
+const ConnectedApp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
+
+export default ConnectedApp;

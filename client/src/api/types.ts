@@ -1,10 +1,10 @@
-export interface IItem {
+export interface IUser {
   name: string;
   accountName: string;
   avatar: string;
 }
 
 export interface IUserResponse {
-  followers: IItem[];
+  followers: IUser[];
   total_followers: number;
 }

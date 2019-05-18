@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./styles.module.scss";
-import { IItem } from "../../api/types";
+import { IUser } from "../../api/types";
 
-export const ListItem = (props: { item: IItem }) => {
+export const ListItem = (props: { item: IUser }) => {
   const {
     item: { avatar, name, accountName }
   } = props;
