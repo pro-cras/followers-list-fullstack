@@ -18,12 +18,13 @@ export const AppHeader = (props: Props) => {
         [styles.active]: isActive,
         [styles.inactive]: !isActive
       })}
+      onFocus={() => setActive(true)}
+      onBlur={() => setActive(true)}
     >
       <div className={styles.dynamicPositioner} />
       <form
+        id="user_form"
         className={styles.transformer}
-        onFocus={() => setActive(true)}
-        onBlur={() => setActive(false)}
         onSubmit={e => {
           props.onSetUserAccountName(accountName);
           e.preventDefault();
@@ -43,6 +44,7 @@ export const AppHeader = (props: Props) => {
       {/* TODO: fadebutton away */}
       <button
         type="submit"
+        form="user_form"
         disabled={!accountName}
         className={styles.submitButton}
       >

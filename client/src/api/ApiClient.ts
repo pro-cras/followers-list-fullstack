@@ -1,18 +1,18 @@
 import { IUser } from "./types";
 
 export class ApiClient {
-  public async getUser(user_id: string) {
+  public async getUser(screen_name: string) {
     return await this.getRequest<IUser>(`api/user`, {
-      user_id
+      screen_name
     });
   }
 
-  public async getFollowers(user_id: string) {
+  public async getFollowers(screen_name: string) {
     return await this.getRequest<{
       total_followers: number;
       followers: IUser[];
     }>(`api/followers`, {
-      user_id
+      screen_name
     });
   }
 

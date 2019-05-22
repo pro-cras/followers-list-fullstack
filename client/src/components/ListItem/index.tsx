@@ -12,6 +12,7 @@ export const ListItem = (props: { item: IUser }) => {
       <a
         href={`https://twitter.com/${accountName}`}
         className={styles.container}
+        target="follower_profile"
       >
         <div className={styles.avatarContainer}>
           <div className={styles.avatarWrapper}>

@@ -10,7 +10,7 @@ export function tryToSetUser(selectedAccountName: string) {
   return function(dispatch: Dispatch, getState: AppState) {
     if (selectedAccountName) {
       return apiClient
-        .getUser("1") // hard-coded one for now, The mock API servicehas limited users
+        .getUser(selectedAccountName) // hard-coded one for now, The mock API servicehas limited users
         .then(user => {
           apiClient.getFollowers(user.accountName).then(followersResponse => {
             dispatch(setSelectedUser(user));

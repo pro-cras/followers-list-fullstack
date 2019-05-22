@@ -1,10 +1,27 @@
 const express = require("express");
 const axios = require("axios");
 const querystring = require("querystring");
+const Twit = require("twit");
+require("dotenv").config();
 
 const app = express();
 
-const SERVICE_API_BASE = "https://reqres.in/api";
+/* 
+  TODO: 
+  1. Add typing for API, shared between client/server
+
+*/
+var T = new Twit({
+  consumer_key: process.env.TWITTER_ACCESS_TOKEN,
+  consumer_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+  app_only_auth: true,
+  // access_token: process.env.TWITTER_ACCESS_TOKEN,
+  // access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+  timeout_ms: 10 * 1000 // optional HTTP request timeout to apply to all requests.
+  // strictSSL: true // optional - requires SSL certificates to be valid.
+});
+
+// const SERVICE_API_BASE = "https://reqres.in/api";
 
 app.set("port", process.env.PORT || 3001);
 
@@ -17,35 +34,36 @@ if (process.env.NODE_ENV === "production") {
 
 function formatUser(userData) {
   return {
-    name: `${userData.first_name} ${userData.last_name}`,
-    accountName: userData.email,
-    avatar: userData.avatar
+    name: userData.name,
+    accountName: userData.screen_name,
+    avatar: `${userData.profile_image_url}`.replace("_normal", "_bigger")
   };
 }
-app.get("/api/user", async (req, res) => {
-  const { user_id } = req.query;
 
-  if (!user_id) {
+app.get("/api/user", async (req, res) => {
+  const { screen_name } = req.query;
+
+  if (!screen_name) {
     res.json({
-      error: "Missing required parameter `user_id`"
+      error: "Missing required parameter `screen_name`"
     });
     return;
   }
 
-  // TODO: Switch to Twitter API: users/lookup
   try {
-    const response = await axios.get(`${SERVICE_API_BASE}/users/${user_id}`);
-    if (!response.data.data) {
+    // const response = await axios.get(`${SERVICE_API_BASE}/users/${user_id}`);
+    const response = await T.get(`users/show`, { screen_name });
+    const data = response.data;
+    if (!data) {
       res
         .status(404) // HTTP status 404: NotFound
         .send("Not found");
     }
-    const data = response.data.data;
     res.json(formatUser(data));
   } catch (e) {
     res
       .status(500) // HTTP status 404: NotFound
-      .send(`Failed to fetch data for 'user_id=${user_id}'`);
+      .send(`Failed to fetch data for 'screen_name=${screen_name}'`);
 
     // res.json({
     //   error: `Failed to fetch data for 'user_id=${user_id}'`
@@ -55,29 +73,31 @@ app.get("/api/user", async (req, res) => {
 });
 
 app.get("/api/followers", async (req, res) => {
-  const { user_id, page = 1, per_page = 4 } = req.query;
+  const { screen_name, cursor = -1, count = 30 } = req.query;
 
-  if (!user_id) {
+  if (!screen_name) {
     res.json({
-      error: "Missing required parameter `user_id`"
+      error: "Missing required parameter `screen_name`"
     });
     return;
   }
 
   // TODO: Switch to Twitter API: followers/list
   try {
-    const response = await axios.get(
-      `${SERVICE_API_BASE}/users`,
-      querystring.stringify({ page, per_page })
-    );
-    const data = response.data.data;
+    const response = await T.get(`followers/list`, {
+      screen_name,
+      count,
+      cursor
+    });
+    const data = response.data;
     res.json({
-      total_followers: response.data.total,
-      followers: data.map(formatUser)
+      followers: data.users.map(formatUser),
+      next_cursor: data.next_cursor_str,
+      previous_cursor: data.previous_cursor_str
     });
   } catch (e) {
     res.json({
-      error: `Failed to fetch followers data for 'user_id=${user_id}'`
+      error: `Failed to fetch followers data for 'screen_name=${screen_name}'`
     });
     return;
   }
