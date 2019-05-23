@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import classNames from "classnames";
 import { SelectedUserState } from "../../store/selectedUser/types";
+import SearchIcon from "@material-ui/icons/Search";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 interface Props {
   onSetUserAccountName: (name: string) => void;
   selectedUser: SelectedUserState;
+  isLoading: boolean;
 }
 
 export const AppHeader = (props: Props) => {
@@ -45,10 +48,10 @@ export const AppHeader = (props: Props) => {
       <button
         type="submit"
         form="user_form"
-        disabled={!accountName}
+        disabled={props.isLoading || !accountName}
         className={styles.submitButton}
       >
-        OK
+        {props.isLoading ? <CircularProgress /> : <SearchIcon />}
       </button>
       <div className={styles.positioner} />
     </header>

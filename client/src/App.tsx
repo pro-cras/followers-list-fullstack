@@ -6,13 +6,14 @@ import { ListItem } from "./components/ListItem";
 import { apiClient } from "./api/ApiClient";
 import { IUser } from "./api/types";
 import { connect } from "react-redux";
-import { AppState } from "./store";
+import { RootState } from "./store";
 import { FollowersState } from "./store/followers/types";
 import { SelectedUserState } from "./store/selectedUser/types";
 import { SortingState } from "./store/sorting/types";
 import { Dispatch } from "redux";
 import { setSelectedUser } from "./store/selectedUser/actions";
 import { tryToSetUser } from "./store/actions";
+import { AppState } from "./store/app/types";
 
 // const items = [...Array(30)].map((item, i) => ({
 //   name: `Foo ${i}`,
@@ -23,6 +24,7 @@ interface AppProps {
   followers: FollowersState;
   selectedUser: SelectedUserState;
   sorting: SortingState;
+  app: AppState;
 }
 
 const App = (props: AppProps & ReturnType<typeof mapDispatchToProps>) => {
@@ -42,6 +44,7 @@ const App = (props: AppProps & ReturnType<typeof mapDispatchToProps>) => {
       <AppHeader
         onSetUserAccountName={props.setUserAccountName}
         selectedUser={props.selectedUser}
+        isLoading={props.app.isLoading}
       />
       <main className={styles.main}>
         {/* TODO: Add status & Controls bar: 
@@ -60,11 +63,12 @@ const App = (props: AppProps & ReturnType<typeof mapDispatchToProps>) => {
   );
 };
 
-function mapStateToProps({ followers, selectedUser, sorting }: AppState) {
+function mapStateToProps({ followers, selectedUser, sorting, app }: RootState) {
   return {
     followers,
     selectedUser,
-    sorting
+    sorting,
+    app
   };
 }
 
