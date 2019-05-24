@@ -1,6 +1,10 @@
 # Things I'd to differently
 
-1. Avoid nested structure (two package.json). I'd try out server rendering with next.js. I'm curious to try it out :)
+1. Improve project setup.
+
+- Avoid nested structure. Installing dependencies of client and server app separately makes starting up too difficult.
+- Option 1: yarn warkspace
+- Option 2: Next.js. Single, SSR app
 
 # Things I'd improve
 
@@ -9,4 +13,4 @@
 1. Animations, transitions
    - When images (e.g. avatars) load, fade them in
    -
-1.
+1. Responsiveness: The input field in the header is not

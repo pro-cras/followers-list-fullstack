@@ -34,7 +34,7 @@
 .input {
   font-size: inherit;
   transition: all var(--header-transition-time);
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: 100px;
   color: var(--color-text);
   background-color: var(--color-background-primary);
@@ -48,12 +48,12 @@
 
   &:focus {
     border-color: var(--color-background-item);
-    border-width: 2px;
+    // border-width: 2px;
   }
 
   .inactive &:hover {
     border-color: var(--color-background-item);
-    border-width: 1px;
+    // border-width: 1px;
   }
 }
 
@@ -89,5 +89,6 @@
 
   .inactive & {
     opacity: 0;
+    transform: scale(0.5);
   }
 }

@@ -1,6 +1,4 @@
 import { AppState } from "./types";
-import { IUser } from "../../api/types";
-import { bool } from "prop-types";
 
 export interface AppState {
   isLoading: boolean;

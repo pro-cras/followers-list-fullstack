@@ -3,7 +3,6 @@ import { apiClient } from "../../api/ApiClient";
 import { Dispatch } from "redux";
 import { setSelectedUser } from "../selectedUser/actions";
 import { setFollowers } from "../followers/actions";
-import { ThunkAction } from "redux-thunk";
 import { setIsLoading } from "../app/actions";
 
 // TODO: Figure out how to write thunks with async/await 😖

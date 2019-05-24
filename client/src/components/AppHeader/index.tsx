@@ -22,7 +22,7 @@ export const AppHeader = (props: Props) => {
         [styles.inactive]: !isActive
       })}
       onFocus={() => setActive(true)}
-      onBlur={() => setActive(true)}
+      onBlur={() => setActive(false)}
     >
       <div className={styles.dynamicPositioner} />
       <form
