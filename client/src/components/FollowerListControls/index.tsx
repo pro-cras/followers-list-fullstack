@@ -6,6 +6,8 @@ import { AnyAction } from "redux";
 import { RootState } from "../../store";
 import { ThunkDispatch } from "redux-thunk";
 import { fetchFollowersPage } from "../../store/actions";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 
 interface Props {
   className?: string;
@@ -19,10 +21,10 @@ const FollowerListControls = (props: Props) => {
   return (
     <div className={classNames(props.className, styles.root)}>
       <button onClick={props.onPrev} disabled={!props.hasPrev}>
-        Prev
+        <NavigateBeforeIcon />
       </button>
       <button onClick={props.onNext} disabled={!props.hasNext}>
-        Next
+        <NavigateNextIcon />
       </button>
     </div>
   );
