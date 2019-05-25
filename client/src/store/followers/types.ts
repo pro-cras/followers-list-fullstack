@@ -1,19 +1,40 @@
 import { IUser } from "../../api/types";
 
-// TODO: add isFetching=false to state
-export type FollowersState = IUser[] | null;
+export type FollowersState =
+  | {
+      requestState: "success";
+      data: FollowerListData;
+    }
+  | {
+      requestState: "loading";
+      data: FollowerListData | null;
+    }
+  | {
+      requestState: "idle";
+      data: FollowerListData | null;
+    }
+  | {
+      requestState: "fail";
+      data: null;
+    };
+
+export interface FollowerListData {
+  followers: IUser[];
+  /* cursor = 0 means no more pages */
+  next_cursor: string;
+  previous_cursor: string;
+}
 
 export const SET_FOLLOWERS = "SET_FOLLOWERS";
-export const CLEAR_FOLLOWERS = "CLEAR_FOLLOWERS";
+export const GET_FOLLOWERS = "GET_FOLLOWERS";
 
 export interface SetFollowersAction {
   type: typeof SET_FOLLOWERS;
-  payload: IUser[];
+  payload: FollowerListData;
 }
 
-export interface ClearFollowersAction {
-  type: typeof CLEAR_FOLLOWERS;
-  payload: IUser[];
+export interface GetFollowersAction {
+  type: typeof GET_FOLLOWERS;
 }
 
-export type FollowersActionTypes = SetFollowersAction | ClearFollowersAction;
+export type FollowersActionTypes = SetFollowersAction | GetFollowersAction;

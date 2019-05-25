@@ -1,8 +1,6 @@
 import React, { useState, ReactNode } from "react";
 import styles from "./styles.module.scss";
 import classNames from "classnames";
-import { IUser } from "../../api/types";
-import { Avatar } from "../Avatar";
 
 interface Props {
   children: (p: ChildrenProps) => ReactNode;

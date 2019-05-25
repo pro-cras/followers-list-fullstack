@@ -8,16 +8,12 @@ import { RootState } from "../../store";
 import { FollowersState } from "../../store/followers/types";
 import { SelectedUserState } from "../../store/selectedUser/types";
 import { SortingState } from "../../store/sorting/types";
-import { Dispatch } from "redux";
+import { AnyAction } from "redux";
 import { tryToSetUser } from "../../store/actions";
 import { AppState } from "../../store/app/types";
 import { ControlBar } from "../ControlBar";
+import { ThunkDispatch } from "redux-thunk";
 
-// const items = [...Array(30)].map((item, i) => ({
-//   name: `Foo ${i}`,
-//   accountName: `Lorem${i}`,
-//   avatar: `https://i.pravatar.cc/300?u=${i}`
-// }));
 interface AppProps {
   followers: FollowersState;
   selectedUser: SelectedUserState;
@@ -26,17 +22,6 @@ interface AppProps {
 }
 
 const App = (props: AppProps & ReturnType<typeof mapDispatchToProps>) => {
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await apiClient.getUserFollowers("1");
-  //     if (data.followers) {
-  //       setItems(data.followers);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   return (
     <div className={styles.App}>
       <AppHeader
@@ -46,14 +31,9 @@ const App = (props: AppProps & ReturnType<typeof mapDispatchToProps>) => {
       />
       <ControlBar selectedUser={props.selectedUser} />
       <main className={styles.main}>
-        {/* TODO: Add status & Controls bar: 
-            selected user details (avatar, name, accountName) + clear
-            next/prev paging controls 
-            */}
         <List>
-          {/* TODO: Add react transition group for nice eter/exit effect */}
-          {props.followers &&
-            props.followers.map(item => (
+          {props.followers.requestState === "success" &&
+            props.followers.data.followers.map(item => (
               <ListItem key={item.accountName} item={item} />
             ))}
         </List>
@@ -71,9 +51,9 @@ function mapStateToProps({ followers, selectedUser, sorting, app }: RootState) {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch) {
+function mapDispatchToProps(dispatch: ThunkDispatch<any, any, AnyAction>) {
   return {
-    // @ts-ignore
+    // @ts-ignore TODO: Enable typing of dispatches.
     setUserAccountName: (userId: string) => dispatch(tryToSetUser(userId))
   };
 }

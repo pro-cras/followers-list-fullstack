@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./styles.module.scss";
-import classNames from "classnames";
 import { IUser } from "../../api/types";
 import { Avatar } from "../Avatar";
+import { FollowerListControls } from "../FollowerListControls";
 
 interface Props {
   selectedUser: IUser | null;
@@ -25,6 +25,8 @@ export const ControlBar = (props: Props) => {
           </div>
         </div>
       )}
+      <div style={{ flexGrow: 1 }} />
+      {selectedUser && <FollowerListControls />}
     </div>
   );
 };

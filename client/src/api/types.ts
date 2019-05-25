@@ -4,7 +4,16 @@ export interface IUser {
   avatar: string;
 }
 
-export interface IUserResponse {
-  followers: IUser[];
-  total_followers: number;
-}
+export type APIRequestState =
+  | RequestSuccess
+  | RequestFail
+  | RequestIdle
+  | RequestLoading;
+
+type RequestSuccess = "success";
+
+type RequestFail = "fail";
+
+type RequestIdle = "idle";
+
+type RequestLoading = "loading";

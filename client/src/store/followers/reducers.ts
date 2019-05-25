@@ -2,10 +2,13 @@ import {
   FollowersState,
   FollowersActionTypes,
   SET_FOLLOWERS,
-  CLEAR_FOLLOWERS
+  GET_FOLLOWERS
 } from "./types";
 
-const initialState: FollowersState = null;
+const initialState: FollowersState = {
+  requestState: "idle",
+  data: null
+};
 
 export function followersReducer(
   state = initialState,
@@ -13,9 +16,15 @@ export function followersReducer(
 ): FollowersState {
   switch (action.type) {
     case SET_FOLLOWERS:
-      return action.payload;
-    case CLEAR_FOLLOWERS:
-      return null;
+      return {
+        requestState: "success",
+        data: { ...action.payload }
+      };
+    case GET_FOLLOWERS:
+      return {
+        ...state,
+        requestState: "loading"
+      };
     default:
       return state;
   }

@@ -73,7 +73,7 @@ app.get("/api/user", async (req, res) => {
 });
 
 app.get("/api/followers", async (req, res) => {
-  const { screen_name, cursor = -1, count = 30 } = req.query;
+  const { screen_name, cursor = "-1", count = 30 } = req.query;
 
   if (!screen_name) {
     res.json({

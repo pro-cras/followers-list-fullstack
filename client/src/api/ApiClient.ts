@@ -1,18 +1,20 @@
 import { IUser } from "./types";
 
 export class ApiClient {
-  public async getUser(screen_name: string) {
+  public async fetchUser(screen_name: string) {
     return await this.getRequest<IUser>(`api/user`, {
       screen_name
     });
   }
 
-  public async getFollowers(screen_name: string) {
+  public async fetchFollowers(screen_name: string, cursor: string = "-1") {
     return await this.getRequest<{
-      total_followers: number;
       followers: IUser[];
+      next_cursor: string;
+      previous_cursor: string;
     }>(`api/followers`, {
-      screen_name
+      screen_name,
+      cursor
     });
   }
 
