@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
+import { GentleImageWrapper } from "../GentleImageWrapper";
+import classNames from "classnames";
 
 interface Props {
   className?: string;
@@ -9,13 +11,17 @@ interface Props {
 
 export const Avatar = (props: Props) => {
   return (
-    <div className={styles.root}>
-      <img
-        // TODO: add fade-in transition when image is loaded
-        className={styles.avatar}
-        src={props.src}
-        alt={`${props.userName}'s avatar`}
-      />
+    <div className={classNames(props.className, styles.root)}>
+      <GentleImageWrapper>
+        {({ className, handleLoaded }) => (
+          <img
+            className={classNames(className, styles.avatar)}
+            src={props.src}
+            alt={`${props.userName}'s avatar`}
+            onLoad={handleLoaded}
+          />
+        )}
+      </GentleImageWrapper>
     </div>
   );
 };

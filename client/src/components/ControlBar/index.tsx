@@ -13,11 +13,17 @@ export const ControlBar = (props: Props) => {
   return (
     <div className={styles.root}>
       {selectedUser && (
-        <>
-          <div>Name: {selectedUser.name}</div>
-          <div>Screen Name: {selectedUser.accountName}</div>
-          <Avatar userName={selectedUser.name} src={selectedUser.avatar} />
-        </>
+        <div className={styles.selectedUser}>
+          <Avatar
+            className={styles.userAvatar}
+            userName={selectedUser.name}
+            src={selectedUser.avatar}
+          />
+          <div className={styles.userDetails}>
+            <div>{selectedUser.name}</div>
+            <div className={styles.screenName}>@{selectedUser.accountName}</div>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -8,9 +8,10 @@
 
 # Things I'd improve
 
-1. Error handling
+1. Error handling: No such user, Protected user (like `@aa`)
 1. Make API requests cancellable, using AbortController
 1. Animations, transitions
    - When images (e.g. avatars) load, fade them in
    -
 1. Responsiveness: The input field in the header is not
+1. Styling: More consistent format for username + screenname. followers list doesn't match selected user.

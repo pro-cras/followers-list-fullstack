@@ -1,3 +1,27 @@
 .root {
   background-color: var(--color-background-primary);
+  display: flex;
+  padding: 10px var(--size-app-horizontal-margin);
+}
+
+.selectedUser {
+  display: flex;
+}
+
+.followers {
+  display: flex;
+}
+
+.userAvatar {
+  margin-right: 10px;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.screenName {
+  font-weight: bold;
 }

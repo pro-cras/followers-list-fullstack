@@ -6,6 +6,7 @@
   --color-text: #a1a4a4;
   --color-background-item: #e3e3e1;
   --color-accent: orange;
+  --size-app-horizontal-margin: 20px;
   width: 100%;
   color: var(--color-text);
   display: flex;
