@@ -5,10 +5,7 @@ import { List } from "../List";
 import { ListItem } from "../ListItem";
 import { connect } from "react-redux";
 import { RootState } from "../../store";
-import {
-  FollowersState,
-  FollowerSortingKey
-} from "../../store/followers/types";
+import { FollowersState } from "../../store/followers/types";
 import { SelectedUserState } from "../../store/selectedUser/types";
 import { SortingState } from "../../store/sorting/types";
 import { AnyAction } from "redux";
