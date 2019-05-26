@@ -5,9 +5,9 @@ import { SelectedUserState } from "../../store/selectedUser/types";
 import SearchIcon from "@material-ui/icons/Search";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { ControlBar } from "../ControlBar";
-import { useScrollDirectionChange } from "../../reactHooks/useScrollDirectionChange";
 import debounce from "lodash.debounce";
 import { useScroll } from "../../reactHooks/useScroll";
+import { Button } from "../Button";
 
 interface Props {
   onSetUserAccountName: (name: string) => void;
@@ -18,7 +18,6 @@ interface Props {
 export const AppHeader = (props: Props) => {
   const [isActive, setActive] = useState(true);
   const [accountName, setAccountName] = useState("");
-  const [direction, setDirection] = useState(0);
   const debouncedScroll = debounce(useScroll, 100, {
     leading: true,
     trailing: false
@@ -26,7 +25,7 @@ export const AppHeader = (props: Props) => {
 
   const scroll = debouncedScroll();
   useEffect(() => {
-    if (scroll == 0) {
+    if (scroll === 0) {
       setActive(true);
     }
     if (scroll > 200) {
@@ -42,10 +41,10 @@ export const AppHeader = (props: Props) => {
       })}
     >
       <div className={styles.searchBar}>
-        <div className={styles.dynamicPositioner}>{direction}</div>
+        <div className={styles.dynamicPositioner} />
         <form
           id="user_form"
-          className={styles.transformer}
+          className={classNames(styles.transformer, styles.form)}
           onSubmit={e => {
             props.onSetUserAccountName(accountName);
             e.preventDefault();
@@ -61,15 +60,15 @@ export const AppHeader = (props: Props) => {
               autoComplete={"off"}
             />
           </div>
+          <Button
+            type="submit"
+            form="user_form"
+            disabled={props.isLoading || !accountName}
+            className={styles.submitButton}
+          >
+            {props.isLoading ? <CircularProgress /> : <SearchIcon />}
+          </Button>
         </form>
-        <button
-          type="submit"
-          form="user_form"
-          disabled={props.isLoading || !accountName}
-          className={styles.submitButton}
-        >
-          {props.isLoading ? <CircularProgress /> : <SearchIcon />}
-        </button>
         <div className={styles.positioner} />
       </div>
       <ControlBar selectedUser={props.selectedUser} />

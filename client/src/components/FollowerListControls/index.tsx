@@ -14,6 +14,7 @@ import {
   FollowerSortingKey
 } from "../../store/followers/types";
 import { setFollowersSorting } from "../../store/followers/actions";
+import { Button } from "../Button";
 
 interface Props {
   className?: string;
@@ -34,7 +35,7 @@ const FollowerListControls = (props: Props) => {
     <div className={classNames(props.className, styles.root)}>
       <div className={styles.controlGroup}>
         Sorting:
-        <button
+        <Button
           className={styles.button}
           onClick={() => {
             if (sortingKey === "NAME") {
@@ -46,8 +47,8 @@ const FollowerListControls = (props: Props) => {
           }}
         >
           Name <FlippableSortIcon direction={sortingDirection} />
-        </button>
-        <button
+        </Button>
+        <Button
           className={styles.button}
           onClick={() => {
             if (sortingKey === "SCREEN_NAME") {
@@ -61,24 +62,24 @@ const FollowerListControls = (props: Props) => {
           }}
         >
           Screen Name <FlippableSortIcon direction={sortingDirection} />
-        </button>
+        </Button>
       </div>
       <div className={styles.controlGroup}>
         Paging:
-        <button
+        <Button
           className={styles.button}
           onClick={props.onPrev}
           disabled={!props.hasPrev}
         >
           <NavigateBeforeIcon />
-        </button>
-        <button
+        </Button>
+        <Button
           className={styles.button}
           onClick={props.onNext}
           disabled={!props.hasNext}
         >
           <NavigateNextIcon />
-        </button>
+        </Button>
       </div>
     </div>
   );

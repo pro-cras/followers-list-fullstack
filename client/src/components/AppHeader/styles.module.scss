@@ -3,7 +3,7 @@
   --header-transition-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 
   position: sticky;
-  top: 0px;
+  top: 0;
   right: 0;
   left: 0;
 
@@ -66,6 +66,10 @@
   }
 }
 
+.form {
+  display: flex;
+}
+
 .transformer {
   transform: scale(0.5);
   transform-origin: 0;
@@ -95,13 +99,7 @@
   height: $size;
   width: $size;
   border-radius: 50%;
-  transition: all calc(var(--header-transition-time) / 2);
   display: flex;
   justify-content: center;
   flex-shrink: 0;
-
-  .inactive & {
-    opacity: 0;
-    transform: scale(0.5);
-  }
 }
