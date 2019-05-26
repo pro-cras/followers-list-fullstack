@@ -20,10 +20,18 @@ interface Props {
 const FollowerListControls = (props: Props) => {
   return (
     <div className={classNames(props.className, styles.root)}>
-      <button onClick={props.onPrev} disabled={!props.hasPrev}>
+      <button
+        className={styles.button}
+        onClick={props.onPrev}
+        disabled={!props.hasPrev}
+      >
         <NavigateBeforeIcon />
       </button>
-      <button onClick={props.onNext} disabled={!props.hasNext}>
+      <button
+        className={styles.button}
+        onClick={props.onNext}
+        disabled={!props.hasNext}
+      >
         <NavigateNextIcon />
       </button>
     </div>

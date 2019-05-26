@@ -11,7 +11,6 @@ import { SortingState } from "../../store/sorting/types";
 import { AnyAction } from "redux";
 import { tryToSetUser } from "../../store/actions";
 import { AppState } from "../../store/app/types";
-import { ControlBar } from "../ControlBar";
 import { ThunkDispatch } from "redux-thunk";
 
 interface AppProps {
@@ -29,7 +28,6 @@ const App = (props: AppProps & ReturnType<typeof mapDispatchToProps>) => {
         selectedUser={props.selectedUser}
         isLoading={props.app.isLoading}
       />
-      <ControlBar selectedUser={props.selectedUser} />
       <main className={styles.main}>
         <List>
           {props.followers.requestState === "success" &&
