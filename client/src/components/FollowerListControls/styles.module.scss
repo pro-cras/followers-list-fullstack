@@ -1,3 +1,19 @@
+.root {
+  display: flex;
+  align-items: center;
+}
+
 .button {
   display: inline-flex;
+  align-items: center;
+}
+
+.flip {
+  transform: rotate(0.5turn);
+}
+
+.controlGroup {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
 }

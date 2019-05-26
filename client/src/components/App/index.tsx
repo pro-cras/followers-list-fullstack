@@ -5,13 +5,17 @@ import { List } from "../List";
 import { ListItem } from "../ListItem";
 import { connect } from "react-redux";
 import { RootState } from "../../store";
-import { FollowersState } from "../../store/followers/types";
+import {
+  FollowersState,
+  FollowerSortingKey
+} from "../../store/followers/types";
 import { SelectedUserState } from "../../store/selectedUser/types";
 import { SortingState } from "../../store/sorting/types";
 import { AnyAction } from "redux";
 import { tryToSetUser } from "../../store/actions";
 import { AppState } from "../../store/app/types";
 import { ThunkDispatch } from "redux-thunk";
+import { IUser } from "../../api/types";
 
 interface AppProps {
   followers: FollowersState;
@@ -21,6 +25,37 @@ interface AppProps {
 }
 
 const App = (props: AppProps & ReturnType<typeof mapDispatchToProps>) => {
+  const sortingFunc = (a: IUser, b: IUser) => {
+    const key = props.followers.sorting.key;
+
+    const { direction } = props.followers.sorting;
+    const multiplier = direction === "ASC" ? -1 : 1;
+
+    if (key === "NAME") {
+      return a.name.localeCompare(b.name) * multiplier;
+    }
+
+    if (key === "SCREEN_NAME") {
+      return a.accountName.localeCompare(b.accountName) * multiplier;
+    }
+
+    return 0;
+  };
+
+  const getList: () => IUser[] = () => {
+    if (
+      props.followers.requestState === "success" &&
+      props.followers.data.followers
+    ) {
+      if (props.followers.sorting.key === null) {
+        return props.followers.data.followers;
+      }
+
+      return props.followers.data.followers.sort(sortingFunc);
+    }
+
+    return [];
+  };
   return (
     <div className={styles.App}>
       <AppHeader
@@ -30,10 +65,9 @@ const App = (props: AppProps & ReturnType<typeof mapDispatchToProps>) => {
       />
       <main className={styles.main}>
         <List>
-          {props.followers.requestState === "success" &&
-            props.followers.data.followers.map(item => (
-              <ListItem key={item.accountName} item={item} />
-            ))}
+          {getList().map(item => (
+            <ListItem key={item.accountName} item={item} />
+          ))}
         </List>
       </main>
     </div>

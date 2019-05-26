@@ -20,7 +20,7 @@ export const ControlBar = (props: Props) => {
             src={selectedUser.avatar}
           />
           <div className={styles.userDetails}>
-            <div>{selectedUser.name}</div>
+            <div className={styles.name}>{selectedUser.name}</div>
             <div className={styles.screenName}>@{selectedUser.accountName}</div>
           </div>
         </div>

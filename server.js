@@ -51,7 +51,6 @@ app.get("/api/user", async (req, res) => {
   }
 
   try {
-    // const response = await axios.get(`${SERVICE_API_BASE}/users/${user_id}`);
     const response = await T.get(`users/show`, { screen_name });
     const data = response.data;
     if (!data) {
