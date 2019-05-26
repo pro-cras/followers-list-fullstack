@@ -1,0 +1,9 @@
+.root {
+  background-color: var(--color-accent);
+  color: var(--color-background-primary);
+  border: 0;
+
+  &:disabled {
+    opacity: 0.7;
+  }
+}
