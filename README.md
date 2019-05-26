@@ -37,13 +37,12 @@ or
 npm run  start
 ```
 
-# Things I'd to differently
+# Things I'd do differently
 
-1. Improve project setup.
+1.  Avoid nested structure (client project inside server project). Installing dependencies of client and server app separately makes starting up more difficult.
 
-- Avoid nested structure. Installing dependencies of client and server app separately makes starting up too difficult.
-- Option 1: yarn workspaces
-- Option 2: Next.js. Single, SSR app
+    - Option 1: yarn workspaces
+    - Option 2: Next.js. Single, SSR app
 
 # Things I'd improve
 
