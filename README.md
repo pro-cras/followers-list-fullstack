@@ -49,8 +49,11 @@ npm run  start
 1. Error handling:
    - No such user
    - For protected users (like `@aa`), the follower list is private
+   - React Error Boundaries
 1. Make API requests cancellable, using AbortController
 1. Responsiveness: The input field in the header is not responsive
 1. Styling: More consistent format for username + screenname. followers list doesn't match selected user.
 1. Improve styling of buttons
 1. State: No need to keep a global `isLoading` state in the app reducer. Every request should maintain it's state, as I did for the followers request
+1. Add loader (spinner) for followers list
+1. Add content for empty list, if user has no fopllowers.
