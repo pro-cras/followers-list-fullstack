@@ -48,7 +48,7 @@ const App = (props: AppProps & ReturnType<typeof mapDispatchToProps>) => {
         return props.followers.data.followers;
       }
 
-      return props.followers.data.followers.sort(sortingFunc);
+      return props.followers.data.followers.slice().sort(sortingFunc);
     }
 
     return [];
